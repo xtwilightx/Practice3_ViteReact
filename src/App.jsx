@@ -1,14 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Welcome from './Components/Welcome'
-import { useEffect } from 'react'
-import { useFetch } from './hooks/useFetch'
-
+import { useFetch } from './hooks/useFetch';
 
 function App() {
-  <useFetch url={"http://api.openweathermap.org/geo/1.0/reverse?lat=56&lon=56&limit=10&appid=88bfcd2806bae8b88b443677fa94eb90"} />
+    const { error, isLoaded, items } = useFetch(
+        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
+    );
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!isLoaded) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <div className="size-6">
+            <h1>Non-Alcoholic Cocktails</h1>
+            <ul>
+                {items.map((item) => (
+                    <li key={item.idDrink}>
+                        {item.strDrink}
+                        <img 
+                            src={item.strDrinkThumb} 
+                            alt={item.strDrink} 
+                            width="50" 
+                        />
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
-export default App
+export default App;

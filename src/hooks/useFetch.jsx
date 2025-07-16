@@ -1,40 +1,43 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (url) => {
-    const [error,setError] = useState(null)
-    const [isLoaded,setIsLoaded] = useState(false)
-    const [items,setItems] = useState([])
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setItems(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(true);
+        const abortController = new AbortController();
+        
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url, { 
+                    signal: abortController.signal 
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            )
-    }, [url])
+                
+                const result = await response.json();
+                
+                if (!result.drinks) {
+                    throw new Error('No drinks property in response');
+                }
+                
+                setItems(result.drinks);
+                setIsLoaded(true);
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    setError(error);
+                    setIsLoaded(true);
+                }
+            }
+        };
 
-    
-    if (error) return <div>error</div>
-    else if (!isLoaded) return <div>Loading...</div> 
-    
-    else return <>
-    <div className="size-6">
-        <ul>
-            {items.map((items) => (
-                <li key={items.name}>{items.name}</li>
-            ))}
+        fetchData();
 
+        return () => abortController.abort();
+    }, [url]);  // Добавляем url в зависимости
 
-        </ul>
-
-    </div>
-    </>
-
-}
+    return { error, isLoaded, items };
+};
