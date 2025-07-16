@@ -1,43 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export const useFetch = (url) => {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+export const useFetch = ({ url, dataKey = 'drinks' }) => { // Фигурные скобки для деструктуризации
+    const [state, setState] = useState({
+        items: [],
+        isLoaded: false,
+        error: null
+    });
 
     useEffect(() => {
         const abortController = new AbortController();
-        
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url, { 
-                    signal: abortController.signal 
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                
-                if (!result.drinks) {
-                    throw new Error('No drinks property in response');
-                }
-                
-                setItems(result.drinks);
-                setIsLoaded(true);
-            } catch (error) {
-                if (error.name !== 'AbortError') {
-                    setError(error);
-                    setIsLoaded(true);
-                }
-            }
-        };
 
-        fetchData();
+        setState(prev => ({ ...prev, isLoaded: false, error: null }));
+
+        fetch(url, { signal: abortController.signal })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                if (abortController.signal.aborted) return;
+                
+                const result = data[dataKey] ?? [];
+                setState({
+                    items: Array.isArray(result) ? result : [result],
+                    isLoaded: true,
+                    error: null
+                });
+            })
+            .catch(error => {
+                if (error.name !== 'AbortError') {
+                    setState({
+                        items: [],
+                        isLoaded: true,
+                        error: error.message
+                    });
+                }
+            });
 
         return () => abortController.abort();
-    }, [url]);  // Добавляем url в зависимости
+    }, [url, dataKey]);
 
-    return { error, isLoaded, items };
+    return state;
 };
