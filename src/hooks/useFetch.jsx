@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useFetch = ({ url, dataKey = 'drinks' }) => { // Фигурные скобки для деструктуризации
+export const useFetch = ({ url, dataKey = 0 }) => {
     const [state, setState] = useState({
         items: [],
         isLoaded: false,
@@ -20,7 +20,7 @@ export const useFetch = ({ url, dataKey = 'drinks' }) => { // Фигурные �
             .then(data => {
                 if (abortController.signal.aborted) return;
                 
-                const result = data[dataKey] ?? [];
+                const result = data[dataKey] ?? data;
                 setState({
                     items: Array.isArray(result) ? result : [result],
                     isLoaded: true,
