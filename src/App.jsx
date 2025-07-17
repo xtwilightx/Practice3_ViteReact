@@ -12,6 +12,20 @@ function App() {
     const [latitude, setLatitude] = useState()
     const [longitude, setLongitude] = useState()
 
+    const handleActivateCity = (city) => {
+        setUserCity(city);
+        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=88bfcd2806bae8b88b443677fa94eb90`)
+            .then(res => res.json())
+            .then(data => {
+                if (data && data[0]) {
+                    setLatitude(data[0].lat);
+                    setLongitude(data[0].lon);
+                }
+            })
+            .catch(console.error);
+    };
+
+
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -37,8 +51,8 @@ function App() {
 
             <span className='text-[aqua] text-3xl'>⛅<span className='text-white'>Погода</span>⛅</span>
             <div><Location userCity={userCity} setUserCity={setUserCity} latitude={latitude} longitude={longitude} /></div>
-            <div><Weather latitude={latitude} longitude={longitude} key={`${latitude},${longitude}`} /></div>
-            <div><ParseCity saveCities={saveCities} setSaveCities={setSaveCities} setLongitude={setLongitude} setLatitude={setLatitude} userCity={userCity} /></div>
+            <div><Weather latitude={latitude} longitude={longitude} key={`${latitude},${longitude}`}/>
+            </div> <div><ParseCity saveCities={saveCities} setSaveCities={setSaveCities} setLongitude={setLongitude} setLatitude={setLatitude}  /></div>
             {saveCities.length > 0 && (
                 <div className="saved-cities">
                     <h3>Сохраненные города:</h3>
@@ -56,7 +70,7 @@ function App() {
                                     <span className="city-name">{city}</span>
                                     <button
                                         className="activate-btn text-green-400 text-4xl"
-                                        onClick={() => setUserCity(city)}
+                                        onClick={() => handleActivateCity(city)}
                                     >
                                         ✓
                                     </button>

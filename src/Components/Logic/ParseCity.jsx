@@ -6,17 +6,6 @@ export function ParseCity({ saveCities, setSaveCities, setLatitude, setLongitude
     const [isButtonClicked, setIsButtonClicked] = useState();
     const [cityName, setCityName] = useState();
 
-    useEffect(() => {
-        if (userCity) {
-            fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userCity}&appid=88bfcd2806bae8b88b443677fa94eb90`)
-                .then(res => res.json())
-                .then(data => {
-                    setLatitude(data[0].lat);
-                    setLongitude(data[0].lon);
-                });
-        }
-    }, [userCity]);
-
     const handleClick = () => {
         fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userCityInput}&appid=88bfcd2806bae8b88b443677fa94eb90`).then((res) =>
 
