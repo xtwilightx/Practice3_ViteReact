@@ -31,16 +31,14 @@ function App() {
         }
 
     }, [])
-    console.log(latitude);
-    console.log(longitude);
     return (
 
         <div className='App'>
 
             <span className='text-[aqua] text-3xl'>⛅<span className='text-white'>Погода</span>⛅</span>
             <div><Location userCity={userCity} setUserCity={setUserCity} latitude={latitude} longitude={longitude} /></div>
-            <div><Weather latitude={latitude} longitude={longitude} /></div>
-            <div><ParseCity saveCities={saveCities} setSaveCities={setSaveCities} setLongitude={setLongitude} setLatitude={setLatitude} /></div>
+            <div><Weather latitude={latitude} longitude={longitude} key={`${latitude},${longitude}`} /></div>
+            <div><ParseCity saveCities={saveCities} setSaveCities={setSaveCities} setLongitude={setLongitude} setLatitude={setLatitude} userCity={userCity} /></div>
             {saveCities.length > 0 && (
                 <div className="saved-cities">
                     <h3>Сохраненные города:</h3>

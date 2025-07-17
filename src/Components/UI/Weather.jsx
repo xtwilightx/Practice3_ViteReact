@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 
+
 export function Weather({ latitude, longitude }) {
     const [userCityInput, setUserCityInput] = useState("");
     const { error, isLoaded, items } = useFetch({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=sunset&hourly=temperature_2m&current=relative_humidity_2m,apparent_temperature`,
     });
+
+
 
     if (error) {
         return <div>Error: {error}</div>;

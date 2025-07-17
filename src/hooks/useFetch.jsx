@@ -19,7 +19,6 @@ export const useFetch = ({ url }) => {
             })
             .then(data => {
                 if (abortController.signal.aborted) return;
-                console.log(data)
                 const result = data;
                 setState({
                     items: result,

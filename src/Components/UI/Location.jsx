@@ -10,9 +10,7 @@ export function Location({userCity, setUserCity, latitude, longitude}) {
     });
     useEffect(() => {
         if (items.length > 0){
-        console.log(items);
         const firstItem = items[0];
-        console.log(firstItem.name);
         setUserCity(firstItem.name);
     }
     }, [items])
