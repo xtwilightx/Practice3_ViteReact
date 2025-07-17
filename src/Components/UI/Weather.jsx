@@ -28,12 +28,16 @@ export function Weather({ latitude, longitude, userCity }) {
                 <li className="flex flex-col" key={items.hourly.time[0]}>
                     {/* Время: {items.hourly.time[0]}, */}
                     <span>Температура: {items.hourly.temperature_2m[0]}°C</span>
-                    <span>Время заката: {(items.daily.sunset[0]).slice(-5)}</span>  
-                    <span>Влажность: {items.current.relative_humidity_2m}</span>
-                    <span>Температура, которая ощущается: {items.current.apparent_temperature}</span>
+                    <div className="group">
+                        <button className="px-2 py-1 rounded">Доп информация:</button>
+                        <div className="hidden group-hover:block">
+                            <div>Время заката: {(items.daily.sunset[0]).slice(-5)}</div>
+                            <div>Влажность: {items.current.relative_humidity_2m}</div>
+                            <div>Температура, которая ощущается: {items.current.apparent_temperature}</div>
+                        </div>
+                    </div>
                 </li>
             </ul>
-
         </div>
     );
 }
