@@ -7,5 +7,8 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss(),
   ],
-  base: "/Practice3_ViteReact/"
+  base: "/Practice3_ViteReact/",
+  build: {
+    outDir: 'build',  // теперь билд будет в `build` вместо `dist`
+  }
 })
