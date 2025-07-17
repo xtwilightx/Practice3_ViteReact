@@ -14,7 +14,7 @@ function App() {
 
     const handleActivateCity = (city) => {
         setUserCity(city);
-        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=88bfcd2806bae8b88b443677fa94eb90`)
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=88bfcd2806bae8b88b443677fa94eb90`)
             .then(res => res.json())
             .then(data => {
                 if (data && data[0]) {

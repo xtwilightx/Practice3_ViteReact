@@ -6,7 +6,7 @@ export function ParseCity({ saveCities, setSaveCities, setLatitude, setLongitude
     const [cityName, setCityName] = useState();
 
     const handleClick = () => {
-        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userCityInput}&appid=88bfcd2806bae8b88b443677fa94eb90`).then((res) =>
+        fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userCityInput}&appid=88bfcd2806bae8b88b443677fa94eb90`).then((res) =>
 
             res.json()).then(data => {
                 setLatitude(data[0].lat)

@@ -4,7 +4,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 export function Location({userCity, setUserCity, latitude, longitude}) {
         const { error, isLoaded, items } = useFetch({
-        url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=88bfcd2806bae8b88b443677fa94eb90`
+        url: `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=88bfcd2806bae8b88b443677fa94eb90`
     });
     useEffect(() => {
         if (items.length > 0){
