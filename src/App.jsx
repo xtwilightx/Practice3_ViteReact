@@ -50,7 +50,7 @@ function App() {
                                 <div className="city-buttons">
                                     <button
                                         className="activate-btn"
-                                        onClick={() => handleActivateCity(city)}
+                                        onClick={() => setSaveCities(city)}
                                     >
                                         ✓
                                     </button>
@@ -67,6 +67,8 @@ function App() {
                 </div>
             )}
         </div>
+
+
     );
 }
 
