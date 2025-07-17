@@ -29,8 +29,6 @@ export function Location({latitude, longitude}) {
 
     return (
         <div className="">
-            <input className="bg-gray-600 rounded-2xl " name="city" 
-            onChange={(e) => setUserCityInput(e.target.value)}></input>
             <div className="flex flex-col w-full">
             <span>Вы находитесь в:</span>
             <span>{userCityAuto}</span>

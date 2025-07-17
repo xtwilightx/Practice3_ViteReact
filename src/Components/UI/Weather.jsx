@@ -7,8 +7,19 @@ export function Weather({latitude, longitude}) {
         const [userCityInput, setUserCityInput] = useState("");
         const { error, isLoaded, items } = useFetch({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`,
-        dataKey: "drinks"
+        dataKey: 0
     });
+
+    useEffect(() => {
+        if (items.length > 0){
+        console.log(items);
+        const firstItem = items[0];
+        console.log(firstItem.name);
+        setUserCityAuto(firstItem.name);
+        new Date()
+    
+    }
+    }, [items]) 
 
     if (error) {
         return <div>Error: {error}</div>;
@@ -21,8 +32,7 @@ export function Weather({latitude, longitude}) {
     return (
         <div className="">
             <input className="bg-gray-600 rounded-2xl" name="city" 
-            onChange={(e) => setUserCityInput(e.target.value)}></input>
-            <h1>Non-Alcoholic Cocktails</h1>
+            onChange={(e) => setUserCityInput(e.target.value)} value={Date}></input>
             <ul>
                 {items.map((item) => (
                     <li key={item.idDrink}>
