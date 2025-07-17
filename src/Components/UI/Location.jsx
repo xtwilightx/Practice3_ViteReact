@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 
 
-export function Location({latitude, longitude}) {
+export function Location({userCity, setUserCity, latitude, longitude}) {
         const [url, setUrl] = useState(""); 
-        const [userCityInput, setUserCityInput] = useState("");
         const [userCityAuto, setUserCityAuto] = useState("");
         const { error, isLoaded, items } = useFetch({
         url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=88bfcd2806bae8b88b443677fa94eb90`
@@ -14,7 +13,7 @@ export function Location({latitude, longitude}) {
         console.log(items);
         const firstItem = items[0];
         console.log(firstItem.name);
-        setUserCityAuto(firstItem.name);
+        setUserCity(firstItem.name);
     }
     }, [items])    
 
@@ -29,8 +28,8 @@ export function Location({latitude, longitude}) {
     return (
         <div className="">
             <div className="flex flex-col w-full">
-            <span>Вы находитесь в:</span>
-            <span>{userCityAuto}</span>
+            <span>Выбранная локация:</span>
+            <span>{userCity}</span>
             </div>
         </div>
     );

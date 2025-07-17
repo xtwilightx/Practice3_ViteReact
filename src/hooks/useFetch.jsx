@@ -22,7 +22,7 @@ export const useFetch = ({ url }) => {
                 console.log(data)
                 const result = data;
                 setState({
-                    items: Array.isArray(result) ? result : [result],
+                    items: result,
                     isLoaded: true,
                     error: null
                 });

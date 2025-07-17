@@ -21,18 +21,13 @@ export function Weather({ latitude, longitude }) {
 
     return (
         <div className="">
-            <input 
-                className="bg-gray-600 rounded-2xl" 
-                name="city"
-                value={userCityInput}
-                onChange={(e) => setUserCityInput(e.target.value)} 
-            />
             <ul>
                 <li key={items.hourly.time[0]}>
-                    Время: {items.hourly.time[0]}, 
+                    Время: {items.hourly.time[0]},
                     Температура: {items.hourly.temperature_2m[0]}°C
                 </li>
             </ul>
+
         </div>
     );
 }
