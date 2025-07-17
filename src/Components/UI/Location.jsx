@@ -7,8 +7,7 @@ export function Location({latitude, longitude}) {
         const [userCityInput, setUserCityInput] = useState("");
         const [userCityAuto, setUserCityAuto] = useState("");
         const { error, isLoaded, items } = useFetch({
-        url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=88bfcd2806bae8b88b443677fa94eb90`,
-        dataKey: 0
+        url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=88bfcd2806bae8b88b443677fa94eb90`
     });
     useEffect(() => {
         if (items.length > 0){

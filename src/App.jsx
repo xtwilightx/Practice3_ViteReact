@@ -33,7 +33,7 @@ function App() {
         <div>navigat</div>
         <div><Location latitude={latitude} longitude={longitude}/></div>
         <div>Погода в вашем городе:</div>
-        <div><Weather /></div>
+        <div><Weather latitude={latitude} longitude={longitude}/></div>
     </div>
     )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useFetch = ({ url, dataKey = 0 }) => {
+export const useFetch = ({ url }) => {
     const [state, setState] = useState({
         items: [],
         isLoaded: false,
@@ -19,8 +19,8 @@ export const useFetch = ({ url, dataKey = 0 }) => {
             })
             .then(data => {
                 if (abortController.signal.aborted) return;
-                
-                const result = data[dataKey] ?? data;
+                console.log(data)
+                const result = data;
                 setState({
                     items: Array.isArray(result) ? result : [result],
                     isLoaded: true,
@@ -38,7 +38,7 @@ export const useFetch = ({ url, dataKey = 0 }) => {
             });
 
         return () => abortController.abort();
-    }, [url, dataKey]);
+    }, [url]);
 
     return state;
 };
