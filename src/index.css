@@ -16,7 +16,13 @@
 
 }
 
-.App > * {
-  display: block;
-  margin-bottom: 1em;
+.App{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+  min-height: 100vh;      /* на всю высоту viewport */
+  margin: 0;
+  gap: 3px;
 }

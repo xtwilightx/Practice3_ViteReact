@@ -33,14 +33,14 @@ export function ParseCity({ saveCities, setSaveCities, setLatitude, setLongitude
 
 
     return (
-        <div className='flex flex-col w-64'>
+        <div className='flex flex-col w-80'>
             <input
-                className="bg-gray-600 rounded-2xl"
+                className="bg-gray-600 rounded-2xl border-2"
                 name="city"
                 value={userCityInput}
                 onChange={(e) => setUserCityInput(e.target.value)}
             />
-            <button onClick={handleClick}>Сохранить город</button>
+            <button className='text-green-200' onClick={handleClick}><u>Сохранить город</u></button>
         </div>
     )
 }
