@@ -3,7 +3,6 @@ import { useFetch } from "../../hooks/useFetch";
 
 
 export function Weather({ latitude, longitude, userCity }) {
-    const [userCityInput, setUserCityInput] = useState("");
     const { error, isLoaded, items } = useFetch({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=sunset&hourly=temperature_2m&current=relative_humidity_2m,apparent_temperature`,
     });
@@ -26,11 +25,15 @@ export function Weather({ latitude, longitude, userCity }) {
         <div className="">
             <ul>
                 <li className="flex flex-col" key={items.hourly.time[0]}>
-                    {/* Время: {items.hourly.time[0]}, */}
                     <span>Температура: {items.hourly.temperature_2m[0]}°C</span>
-                    <div className="group">
-                        <button className="px-2 py-1 rounded">Доп информация:</button>
-                        <div className="hidden group-hover:block">
+                    <div>
+                        <button 
+                            onClick={(e) => e.currentTarget.nextElementSibling.classList.toggle('hidden')}
+                            className="py-1 rounded"
+                        >
+                            Доп информация: 🖱️
+                        </button>
+                        <div className="hidden">
                             <div>Время заката: {(items.daily.sunset[0]).slice(-5)}</div>
                             <div>Влажность: {items.current.relative_humidity_2m}</div>
                             <div>Температура, которая ощущается: {items.current.apparent_temperature}</div>

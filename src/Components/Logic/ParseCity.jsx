@@ -3,7 +3,6 @@ import { useFetch } from '../../hooks/useFetch';
 
 export function ParseCity({ saveCities, setSaveCities, setLatitude, setLongitude, userCity }) {
     const [userCityInput, setUserCityInput] = useState("");
-    const [isButtonClicked, setIsButtonClicked] = useState();
     const [cityName, setCityName] = useState();
 
     const handleClick = () => {
@@ -29,6 +28,7 @@ export function ParseCity({ saveCities, setSaveCities, setLatitude, setLongitude
                 name="city"
                 value={userCityInput}
                 onChange={(e) => setUserCityInput(e.target.value)}
+                placeholder='Введите нужный город'
             />
             <button className='text-green-200' onClick={handleClick}><u>Сохранить город</u></button>
         </div>
