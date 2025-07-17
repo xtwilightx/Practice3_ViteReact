@@ -15,7 +15,7 @@ export function Location({userCity, setUserCity, latitude, longitude}) {
         console.log(firstItem.name);
         setUserCity(firstItem.name);
     }
-    }, [items])    
+    }, [items])
 
     if (error) {
         return <div>Error: {error}</div>;

@@ -50,7 +50,7 @@ function App() {
                                 <div className="city-buttons">
                                     <button
                                         className="activate-btn"
-                                        onClick={() => setSaveCities(city)}
+                                        onClick={() => setUserCity(city)}
                                     >
                                         ✓
                                     </button>
