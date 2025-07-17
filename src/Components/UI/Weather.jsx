@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
-import { loadConfigFromFile } from "vite";
 
 export function Weather({latitude, longitude}) {
-
         const now = new Date()
 
         // const localTime = new Date(
         // now.getTime() - now.getTimezoneOffset * 60000).toISOString.slice(0, -1);
 
         // const formattedDate = date.toISOString();
-        let localTime = now.toISOString()
-        localTime = localTime
         console.log(now.toISOString())
         const [url, setUrl] = useState(""); 
         const [userCityInput, setUserCityInput] = useState("");
